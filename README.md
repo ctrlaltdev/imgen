@@ -2,21 +2,15 @@
 
 Image Generator
 
-## Build to Docker
+## Run on Docker
 
 ```sh
-docker build . -t imgen
-```
-
-## Run Docker
-
-```sh
-docker run -d --name imgen -p 3000:3000 imgen
+docker run -d --name imgen -p 3000:3000 ctrlaltdev/imgen
 ```
 
 You can also customize what port is used in the container:
 ```sh
-docker run -d --name imgen -e "PORT=5000" -p 3000:5000 imgen
+docker run -d --name imgen -e "PORT=5000" -p 3000:5000 ctrlaltdev/imgen
 ```
 
 ## Usage
