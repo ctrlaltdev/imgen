@@ -24,6 +24,10 @@ func LogMiddleware(next http.Handler) http.Handler {
 	return handlers.CombinedLoggingHandler(os.Stdout, next)
 }
 
+func CacheHeader(w http.ResponseWriter) {
+	w.Header().Set("Cache-Control", "private, max-age=3600, s-maxage=900, proxy-revalidate, no-transform")
+}
+
 func ImageHandler(w http.ResponseWriter, r *http.Request) {
 	var (
 		format string
@@ -53,14 +57,17 @@ func ImageHandler(w http.ResponseWriter, r *http.Request) {
 
 	switch format {
 	case "svg":
+		CacheHeader(w)
 		w.Header().Set("Content-Type", "image/svg+xml")
 		err := img.GenSVG(w, width, height)
 		utils.HTTPCheckErr(w, err)
 	case "png":
+		CacheHeader(w)
 		w.Header().Set("Content-Type", "image/png")
 		err := img.GenPNG(w, width, height)
 		utils.HTTPCheckErr(w, err)
 	case "jpg":
+		CacheHeader(w)
 		w.Header().Set("Content-Type", "image/jpeg")
 		err := img.GenJPG(w, width, height)
 		utils.HTTPCheckErr(w, err)
