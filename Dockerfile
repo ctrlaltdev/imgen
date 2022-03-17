@@ -8,7 +8,7 @@ COPY . .
 
 RUN CGO_ENABLED=0 go build -o imgen -a -installsuffix cgo
 
-FROM alpine
+FROM alpine:3.15
 
 WORKDIR /opt/app
 
