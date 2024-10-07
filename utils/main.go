@@ -2,11 +2,13 @@ package utils
 
 import (
 	"net/http"
+
+	"go.uber.org/zap"
 )
 
-func CheckErr(err error) {
+func CheckErr(err error, logger *zap.SugaredLogger) {
 	if err != nil {
-		panic(err)
+		logger.Fatal(err)
 	}
 }
 

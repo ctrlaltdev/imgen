@@ -1,10 +1,16 @@
 module github.com/ctrlaltdev/imgen
 
-go 1.16
+go 1.22
 
 require (
-	github.com/ajstarks/svgo v0.0.0-20210406150507-75cfd577ce75
-	github.com/gorilla/handlers v1.5.1
-	github.com/gorilla/mux v1.8.0
-	golang.org/x/image v0.0.0-20210504121937-7319ad40d33e
+	github.com/ajstarks/svgo v0.0.0-20211024235047-1546f124cd8b
+	github.com/gorilla/handlers v1.5.2
+	github.com/gorilla/mux v1.8.1
+	go.uber.org/zap v1.27.0
+	golang.org/x/image v0.21.0
+)
+
+require (
+	github.com/felixge/httpsnoop v1.0.4 // indirect
+	go.uber.org/multierr v1.10.0 // indirect
 )
