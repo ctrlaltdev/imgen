@@ -106,13 +106,13 @@ func ImageHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if vars["width"] != "" && vars["height"] != "" {
-		width64, err := strconv.ParseInt(vars["width"], 10, 64)
-		utils.CheckErr(err, sugar)
-		height64, err := strconv.ParseInt(vars["height"], 10, 64)
+		var err error
+
+		width, err = strconv.Atoi(vars["width"])
 		utils.CheckErr(err, sugar)
 
-		width = int(width64)
-		height = int(height64)
+		height, err = strconv.Atoi(vars["height"])
+		utils.CheckErr(err, sugar)
 	} else {
 		width = 1920
 		height = 1080
@@ -124,20 +124,22 @@ func ImageHandler(w http.ResponseWriter, r *http.Request) {
 		"height", height,
 	)
 
+	contentTypeHeader := "Content-Type"
+
 	switch format {
 	case "svg":
 		CacheHeader(w)
-		w.Header().Set("Content-Type", "image/svg+xml")
+		w.Header().Set(contentTypeHeader, "image/svg+xml")
 		err := img.GenSVG(w, width, height)
 		utils.HTTPCheckErr(w, err)
 	case "png":
 		CacheHeader(w)
-		w.Header().Set("Content-Type", "image/png")
+		w.Header().Set(contentTypeHeader, "image/png")
 		err := img.GenPNG(w, width, height)
 		utils.HTTPCheckErr(w, err)
 	case "jpg":
 		CacheHeader(w)
-		w.Header().Set("Content-Type", "image/jpeg")
+		w.Header().Set(contentTypeHeader, "image/jpeg")
 		err := img.GenJPG(w, width, height)
 		utils.HTTPCheckErr(w, err)
 	default:
@@ -170,9 +172,10 @@ func main() {
 
 	portStr, portSet := os.LookupEnv("PORT")
 	if portSet {
-		port, err := strconv.ParseInt(portStr, 10, 64)
+		var err error
+
+		PORT, err = strconv.Atoi(portStr)
 		utils.CheckErr(err, sugar)
-		PORT = int(port)
 	} else {
 		PORT = 3000
 	}
