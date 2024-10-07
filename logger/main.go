@@ -1,4 +1,4 @@
-package utils
+package logger
 
 import (
 	"os"
@@ -9,7 +9,9 @@ import (
 )
 
 var (
-	LOG_LEVEL string = "info"
+	LOG_LEVEL      string = "info"
+	zapLogger      *zap.Logger
+	zapSugarLogger *zap.SugaredLogger
 )
 
 func CreateLogger() *zap.Logger {
@@ -59,4 +61,34 @@ func CreateLogger() *zap.Logger {
 	}
 
 	return zap.Must(config.Build())
+}
+
+func init() {
+	zapLogger = CreateLogger()
+	defer zapLogger.Sync()
+	zapSugarLogger = zapLogger.Sugar()
+}
+
+func Debug(message string, fields ...interface{}) {
+	zapSugarLogger.Debugw(message, fields...)
+}
+
+func Info(message string, fields ...interface{}) {
+	zapSugarLogger.Infow(message, fields...)
+}
+
+func Warn(message string, fields ...interface{}) {
+	zapSugarLogger.Warnw(message, fields...)
+}
+
+func Error(message string, fields ...interface{}) {
+	zapSugarLogger.Errorw(message, fields...)
+}
+
+func Panic(message string, fields ...interface{}) {
+	zapSugarLogger.Panicw(message, fields...)
+}
+
+func Fatal(message string, fields ...interface{}) {
+	zapSugarLogger.Fatalw(message, fields...)
 }

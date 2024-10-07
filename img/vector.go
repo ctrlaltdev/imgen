@@ -92,15 +92,15 @@ func GenVector(img *image.RGBA, w int, h int) error {
 		c      color.RGBA
 	)
 
-	rand.Seed(time.Now().UnixNano())
+	timeRand := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	// CYAN
-	rw = rand.Intn(w/2-w/6) + w/6
-	rh = rand.Intn(h/2-h/6) + h/6
-	angle = float64(rand.Intn(90) - 45)
+	rw = timeRand.Intn(w/2-w/6) + w/6
+	rh = timeRand.Intn(h/2-h/6) + h/6
+	angle = float64(timeRand.Intn(90) - 45)
 
-	o = Vertex{float32(w/2 + rand.Intn(rw) - rw/2), float32(h/2 + rand.Intn(rh) - rh/2)}
-	t = Vertex{float32(rand.Intn(rw) - rw/2), float32(rand.Intn(rh) - rh/2)}
+	o = Vertex{float32(w/2 + timeRand.Intn(rw) - rw/2), float32(h/2 + timeRand.Intn(rh) - rh/2)}
+	t = Vertex{float32(timeRand.Intn(rw) - rw/2), float32(timeRand.Intn(rh) - rh/2)}
 
 	outV = CalcVertices(w, h, rw, rh, 0).Rotate(o.x, o.y, angle).Translate(t.x, t.y)
 	inV = CalcVertices(w, h, rw, rh, stroke).Rotate(o.x, o.y, angle).Translate(t.x, t.y)
@@ -109,12 +109,12 @@ func GenVector(img *image.RGBA, w int, h int) error {
 	DrawRectOutline(r, img, w, h, c, outV.v, inV.v)
 
 	// MAGENTA
-	rw = rand.Intn(w/2-w/6) + w/6
-	rh = rand.Intn(h/2-h/6) + h/6
-	angle = float64(rand.Intn(90) - 45)
+	rw = timeRand.Intn(w/2-w/6) + w/6
+	rh = timeRand.Intn(h/2-h/6) + h/6
+	angle = float64(timeRand.Intn(90) - 45)
 
-	o = Vertex{float32(w/2 + rand.Intn(rw) - rw/2), float32(h/2 + rand.Intn(rh) - rh/2)}
-	t = Vertex{float32(rand.Intn(rw) - rw/2), float32(rand.Intn(rh) - rh/2)}
+	o = Vertex{float32(w/2 + timeRand.Intn(rw) - rw/2), float32(h/2 + timeRand.Intn(rh) - rh/2)}
+	t = Vertex{float32(timeRand.Intn(rw) - rw/2), float32(timeRand.Intn(rh) - rh/2)}
 
 	outV = CalcVertices(w, h, rw, rh, 0).Rotate(o.x, o.y, angle).Translate(t.x, t.y)
 	inV = CalcVertices(w, h, rw, rh, stroke).Rotate(o.x, o.y, angle).Translate(t.x, t.y)
@@ -123,12 +123,12 @@ func GenVector(img *image.RGBA, w int, h int) error {
 	DrawRectOutline(r, img, w, h, c, outV.v, inV.v)
 
 	// YELLOW
-	rw = rand.Intn(w/2-w/6) + w/6
-	rh = rand.Intn(h/2-h/6) + h/6
-	angle = float64(rand.Intn(90) - 45)
+	rw = timeRand.Intn(w/2-w/6) + w/6
+	rh = timeRand.Intn(h/2-h/6) + h/6
+	angle = float64(timeRand.Intn(90) - 45)
 
-	o = Vertex{float32(w/2 + rand.Intn(rw) - rw/2), float32(h/2 + rand.Intn(rh) - rh/2)}
-	t = Vertex{float32(rand.Intn(rw) - rw/2), float32(rand.Intn(rh) - rh/2)}
+	o = Vertex{float32(w/2 + timeRand.Intn(rw) - rw/2), float32(h/2 + timeRand.Intn(rh) - rh/2)}
+	t = Vertex{float32(timeRand.Intn(rw) - rw/2), float32(timeRand.Intn(rh) - rh/2)}
 
 	outV = CalcVertices(w, h, rw, rh, 0).Rotate(o.x, o.y, angle).Translate(t.x, t.y)
 	inV = CalcVertices(w, h, rw, rh, stroke).Rotate(o.x, o.y, angle).Translate(t.x, t.y)
