@@ -7,7 +7,7 @@ require (
 	github.com/gorilla/handlers v1.5.2
 	github.com/gorilla/mux v1.8.1
 	go.uber.org/zap v1.27.0
-	golang.org/x/image v0.21.0
+	golang.org/x/image v0.22.0
 )
 
 require (
