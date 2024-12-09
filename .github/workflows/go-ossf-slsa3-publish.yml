@@ -30,6 +30,6 @@ jobs:
       id-token: write # To sign.
       attestations: write # To upload attestation.
     needs: build
-    uses: actions/attest-build-provenance@v1
+    uses: actions/attest-build-provenance@v2
     with:
       provenance-file: '${{ github.workspace }}/imgen-*-*'
