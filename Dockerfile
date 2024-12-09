@@ -8,7 +8,7 @@ RUN go mod download
 COPY . .
 RUN CGO_ENABLED=0 go build -o imgen -a -installsuffix cgo
 
-FROM alpine:3.20
+FROM alpine:3.21
 
 RUN addgroup -S imgen && adduser -S imgen -G imgen
 
