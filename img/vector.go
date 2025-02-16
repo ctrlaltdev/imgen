@@ -76,6 +76,26 @@ func DrawRectOutline(r *vector.Rasterizer, dst *image.RGBA, w int, h int, c colo
 	r.Draw(dst, dst.Bounds(), &image.Uniform{c}, image.Point{})
 }
 
+func DrawRectFill(r *vector.Rasterizer, dst *image.RGBA, w int, h int, c color.RGBA, v []Vertex) {
+	r.Reset(w, h)
+	r.MoveTo(v[0].x, v[0].y)
+	r.LineTo(v[1].x, v[1].y)
+	r.LineTo(v[2].x, v[2].y)
+	r.LineTo(v[3].x, v[3].y)
+	r.ClosePath()
+
+	r.Draw(dst, dst.Bounds(), &image.Uniform{c}, image.Point{})
+}
+
+func GenBackground(img *image.RGBA, w int, h int) error {
+	r := vector.NewRasterizer(w, h)
+	r.DrawOp = draw.Src
+
+	DrawRectFill(r, img, w, h, color.RGBA{255, 255, 255, 255}, CalcVertices(w, h, w, h, 0).v)
+
+	return nil
+}
+
 func GenVector(img *image.RGBA, w int, h int) error {
 	r := vector.NewRasterizer(w, h)
 	r.DrawOp = draw.Src

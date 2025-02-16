@@ -21,7 +21,7 @@ var (
 )
 
 func main() {
-	portStr, portSet := os.LookupEnv("PORT")
+	portStr, portSet := os.LookupEnv("IMGEN_PORT")
 	if portSet {
 		var err error
 

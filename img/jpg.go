@@ -9,6 +9,7 @@ import (
 func GenJPG(out io.Writer, w int, h int) error {
 	img := image.NewRGBA(image.Rect(0, 0, w, h))
 
+	GenBackground(img, w, h)
 	GenVector(img, w, h)
 
 	opts := &jpeg.Options{Quality: 100}
